@@ -1,0 +1,1409 @@
+{
+  "stages": [
+    {
+      "id": 1,
+      "name": "STAGE 1: 小手調べ",
+      "description": "販売士の基礎知識で迎え撃て！",
+      "isBoss": false,
+      "enemies": [
+        {
+          "type": "swarm",
+          "hp": 8,
+          "maxHp": 8,
+          "position": 0,
+          "speed": 0.07,
+          "attack": 8,
+          "def": 2
+        },
+        {
+          "type": "swarm",
+          "hp": 8,
+          "maxHp": 8,
+          "position": 0,
+          "speed": 0.06,
+          "attack": 8,
+          "def": 2
+        },
+        {
+          "type": "speed",
+          "hp": 5,
+          "maxHp": 5,
+          "position": 0,
+          "speed": 0.12,
+          "attack": 6,
+          "def": 1
+        },
+        {
+          "type": "swarm",
+          "hp": 10,
+          "maxHp": 10,
+          "position": 0,
+          "speed": 0.07,
+          "attack": 10,
+          "def": 3
+        },
+        {
+          "type": "swarm",
+          "hp": 10,
+          "maxHp": 10,
+          "position": 0,
+          "speed": 0.065,
+          "attack": 10,
+          "def": 3
+        },
+        {
+          "type": "speed",
+          "hp": 6,
+          "maxHp": 6,
+          "position": 0,
+          "speed": 0.13,
+          "attack": 7,
+          "def": 1
+        },
+        {
+          "type": "tank",
+          "hp": 25,
+          "maxHp": 25,
+          "position": 0,
+          "speed": 0.035,
+          "attack": 14,
+          "def": 8
+        }
+      ],
+      "spawnDelay": [
+        0,
+        80,
+        160,
+        300,
+        400,
+        520,
+        700
+      ],
+      "reward": {
+        "sp": 30,
+        "tickets": 1
+      }
+    },
+    {
+      "id": 2,
+      "name": "STAGE 2: 激戦",
+      "description": "大量の魔物が押し寄せる！",
+      "isBoss": false,
+      "enemies": [
+        {
+          "type": "speed",
+          "hp": 8,
+          "maxHp": 8,
+          "position": 0,
+          "speed": 0.14,
+          "attack": 8,
+          "def": 2
+        },
+        {
+          "type": "swarm",
+          "hp": 12,
+          "maxHp": 12,
+          "position": 0,
+          "speed": 0.08,
+          "attack": 12,
+          "def": 4
+        },
+        {
+          "type": "speed",
+          "hp": 8,
+          "maxHp": 8,
+          "position": 0,
+          "speed": 0.13,
+          "attack": 8,
+          "def": 2
+        },
+        {
+          "type": "swarm",
+          "hp": 15,
+          "maxHp": 15,
+          "position": 0,
+          "speed": 0.075,
+          "attack": 12,
+          "def": 5
+        },
+        {
+          "type": "tank",
+          "hp": 35,
+          "maxHp": 35,
+          "position": 0,
+          "speed": 0.04,
+          "attack": 18,
+          "def": 12
+        },
+        {
+          "type": "speed",
+          "hp": 10,
+          "maxHp": 10,
+          "position": 0,
+          "speed": 0.15,
+          "attack": 10,
+          "def": 3
+        },
+        {
+          "type": "swarm",
+          "hp": 15,
+          "maxHp": 15,
+          "position": 0,
+          "speed": 0.08,
+          "attack": 13,
+          "def": 5
+        },
+        {
+          "type": "swarm",
+          "hp": 15,
+          "maxHp": 15,
+          "position": 0,
+          "speed": 0.085,
+          "attack": 13,
+          "def": 5
+        },
+        {
+          "type": "tank",
+          "hp": 40,
+          "maxHp": 40,
+          "position": 0,
+          "speed": 0.04,
+          "attack": 20,
+          "def": 14
+        },
+        {
+          "type": "speed",
+          "hp": 12,
+          "maxHp": 12,
+          "position": 0,
+          "speed": 0.16,
+          "attack": 12,
+          "def": 3
+        }
+      ],
+      "spawnDelay": [
+        0,
+        60,
+        120,
+        200,
+        280,
+        380,
+        460,
+        540,
+        650,
+        780
+      ],
+      "reward": {
+        "sp": 50,
+        "tickets": 2
+      }
+    },
+    {
+      "id": 3,
+      "name": "STAGE 3: 最終決戦",
+      "description": "ボスが待ち構える最終ステージ！",
+      "isBoss": true,
+      "enemies": [
+        {
+          "type": "speed",
+          "hp": 10,
+          "maxHp": 10,
+          "position": 0,
+          "speed": 0.15,
+          "attack": 10,
+          "def": 3
+        },
+        {
+          "type": "speed",
+          "hp": 10,
+          "maxHp": 10,
+          "position": 0,
+          "speed": 0.14,
+          "attack": 10,
+          "def": 3
+        },
+        {
+          "type": "swarm",
+          "hp": 18,
+          "maxHp": 18,
+          "position": 0,
+          "speed": 0.09,
+          "attack": 14,
+          "def": 6
+        },
+        {
+          "type": "tank",
+          "hp": 45,
+          "maxHp": 45,
+          "position": 0,
+          "speed": 0.045,
+          "attack": 20,
+          "def": 15
+        },
+        {
+          "type": "swarm",
+          "hp": 18,
+          "maxHp": 18,
+          "position": 0,
+          "speed": 0.09,
+          "attack": 14,
+          "def": 6
+        },
+        {
+          "type": "speed",
+          "hp": 12,
+          "maxHp": 12,
+          "position": 0,
+          "speed": 0.16,
+          "attack": 12,
+          "def": 4
+        },
+        {
+          "type": "tank",
+          "hp": 50,
+          "maxHp": 50,
+          "position": 0,
+          "speed": 0.045,
+          "attack": 22,
+          "def": 16
+        },
+        {
+          "type": "swarm",
+          "hp": 20,
+          "maxHp": 20,
+          "position": 0,
+          "speed": 0.1,
+          "attack": 16,
+          "def": 7
+        },
+        {
+          "type": "swarm",
+          "hp": 20,
+          "maxHp": 20,
+          "position": 0,
+          "speed": 0.1,
+          "attack": 16,
+          "def": 7
+        },
+        {
+          "type": "speed",
+          "hp": 14,
+          "maxHp": 14,
+          "position": 0,
+          "speed": 0.17,
+          "attack": 14,
+          "def": 5
+        },
+        {
+          "type": "boss",
+          "hp": 80,
+          "maxHp": 80,
+          "position": 0,
+          "speed": 0.03,
+          "attack": 30,
+          "def": 20
+        }
+      ],
+      "spawnDelay": [
+        0,
+        50,
+        100,
+        180,
+        280,
+        360,
+        460,
+        560,
+        640,
+        750,
+        900
+      ],
+      "reward": {
+        "sp": 80,
+        "tickets": 3,
+        "eggTickets": 1
+      }
+    },
+    {
+      "id": 4,
+      "name": "STAGE 4: 裏ボス出現",
+      "description": "裏ボス出現",
+      "isBoss": true,
+      "enemies": [
+        {
+          "type": "swarm",
+          "hp": 10,
+          "maxHp": 10,
+          "position": 0,
+          "speed": 0.07,
+          "attack": 10,
+          "def": 3
+        },
+        {
+          "type": "swarm",
+          "hp": 10,
+          "maxHp": 10,
+          "position": 0,
+          "speed": 0.07,
+          "attack": 10,
+          "def": 3
+        },
+        {
+          "type": "speed",
+          "hp": 6,
+          "maxHp": 6,
+          "position": 0,
+          "speed": 0.14,
+          "attack": 7,
+          "def": 1
+        },
+        {
+          "type": "tank",
+          "hp": 35,
+          "maxHp": 35,
+          "position": 0,
+          "speed": 0.04,
+          "attack": 18,
+          "def": 12
+        },
+        {
+          "type": "tank",
+          "hp": 35,
+          "maxHp": 35,
+          "position": 0,
+          "speed": 0.04,
+          "attack": 18,
+          "def": 12
+        },
+        {
+          "type": "speed",
+          "hp": 6,
+          "maxHp": 6,
+          "position": 0,
+          "speed": 0.14,
+          "attack": 7,
+          "def": 1
+        },
+        {
+          "type": "tank",
+          "hp": 35,
+          "maxHp": 35,
+          "position": 0,
+          "speed": 0.04,
+          "attack": 18,
+          "def": 12
+        },
+        {
+          "type": "tank",
+          "hp": 35,
+          "maxHp": 35,
+          "position": 0,
+          "speed": 0.04,
+          "attack": 18,
+          "def": 12
+        },
+        {
+          "type": "boss",
+          "hp": 80,
+          "maxHp": 80,
+          "position": 0,
+          "speed": 0.03,
+          "attack": 30,
+          "def": 20
+        },
+        {
+          "type": "boss",
+          "hp": 80,
+          "maxHp": 80,
+          "position": 0,
+          "speed": 0.03,
+          "attack": 30,
+          "def": 20
+        },
+        {
+          "type": "boss",
+          "hp": 80,
+          "maxHp": 80,
+          "position": 0,
+          "speed": 0.03,
+          "attack": 30,
+          "def": 20
+        },
+        {
+          "type": "boss",
+          "hp": 80,
+          "maxHp": 80,
+          "position": 0,
+          "speed": 0.03,
+          "attack": 30,
+          "def": 20
+        }
+      ],
+      "spawnDelay": [
+        0,
+        100,
+        200,
+        300,
+        400,
+        500,
+        600,
+        700,
+        800,
+        900,
+        1000,
+        1100
+      ],
+      "reward": {
+        "sp": 50,
+        "tickets": 10,
+        "eggTickets": 1
+      }
+    }
+  ],
+  "questions": [
+    {
+      "q": "マーケティング・ミックス（4P）に含まれないものは？",
+      "options": [
+        "Price",
+        "Product",
+        "People",
+        "Promotion"
+      ],
+      "answer": 2
+    },
+    {
+      "q": "SWOT分析の「O」は何の略？",
+      "options": [
+        "Organization",
+        "Opportunity",
+        "Operation",
+        "Objective"
+      ],
+      "answer": 1
+    },
+    {
+      "q": "商品のライフサイクルで、利益が最大になるのはどの期？",
+      "options": [
+        "導入期",
+        "成長期",
+        "成熟期",
+        "衰退期"
+      ],
+      "answer": 2
+    },
+    {
+      "q": "POSシステムは何の略称？",
+      "options": [
+        "Point of Sale",
+        "Piece of System",
+        "Price of Service",
+        "Product of Store"
+      ],
+      "answer": 0
+    },
+    {
+      "q": "店舗レイアウトで「客動線」を長くする目的は？",
+      "options": [
+        "防犯のため",
+        "購買機会を増やす",
+        "従業員が歩きやすい",
+        "空調効率を上げる"
+      ],
+      "answer": 1
+    },
+    {
+      "q": "「損益分岐点」とは何か？",
+      "options": [
+        "利益が最大になる点",
+        "売上と費用が等しくなる点",
+        "限界利益がゼロの点",
+        "変動費がゼロの点"
+      ],
+      "answer": 1
+    }
+  ],
+  "equipment": [
+    {
+      "id": "wpn_n_1",
+      "name": "木の杖",
+      "type": "weapon",
+      "rarity": "N",
+      "description": "どこにでもある普通の杖。魔法使い専用。",
+      "effectType": "NONE",
+      "effectValue": 0,
+      "icon": "wand",
+      "requiredClass": [
+        "mage"
+      ]
+    },
+    {
+      "id": "arm_n_1",
+      "name": "見習いのローブ",
+      "type": "armor",
+      "rarity": "N",
+      "description": "見習いが着る薄いローブ。",
+      "effectType": "NONE",
+      "effectValue": 0,
+      "icon": "shirt"
+    },
+    {
+      "id": "acc_n_1",
+      "name": "ありふれたお守り",
+      "type": "accessory",
+      "rarity": "N",
+      "description": "気休め。EXP獲得量+1%。",
+      "effectType": "EXP_BOOST",
+      "effectValue": 1,
+      "icon": "amulet"
+    },
+    {
+      "id": "wpn_n_2",
+      "name": "古びた剣",
+      "type": "weapon",
+      "rarity": "N",
+      "description": "少し重い。戦士専用。敵の進行を1%遅らせる。",
+      "effectType": "TIME_SLOW",
+      "effectValue": 1,
+      "icon": "sword",
+      "requiredClass": [
+        "warrior"
+      ]
+    },
+    {
+      "id": "wpn_n_3",
+      "name": "木のそろばん",
+      "type": "weapon",
+      "rarity": "N",
+      "description": "計算が捗る。商人専用。チケットドロップ率+1%",
+      "effectType": "TICKET_DROP",
+      "effectValue": 1,
+      "icon": "calculator",
+      "requiredClass": [
+        "merchant"
+      ]
+    },
+    {
+      "id": "arm_n_2",
+      "name": "革の胸当て",
+      "type": "armor",
+      "rarity": "N",
+      "description": "誤答ダメージを1回防ぐ。",
+      "effectType": "SHIELD",
+      "effectValue": 1,
+      "icon": "shield"
+    },
+    {
+      "id": "wpn_r_1",
+      "name": "知恵のステッキ",
+      "type": "weapon",
+      "rarity": "R",
+      "description": "知識が湧いてくる。魔法使い専用。EXP獲得量+5%。",
+      "effectType": "EXP_BOOST",
+      "effectValue": 5,
+      "icon": "wand",
+      "requiredClass": [
+        "mage"
+      ]
+    },
+    {
+      "id": "acc_r_1",
+      "name": "集中力のメガネ",
+      "type": "accessory",
+      "rarity": "R",
+      "description": "制限時間を延長し敵の進行を5%遅らせる。",
+      "effectType": "TIME_SLOW",
+      "effectValue": 5,
+      "icon": "glasses"
+    },
+    {
+      "id": "acc_r_2",
+      "name": "幸運のコイン",
+      "type": "accessory",
+      "rarity": "R",
+      "description": "ガチャチケットのドロップ確率が上がる。商人専用。",
+      "effectType": "TICKET_DROP",
+      "effectValue": 5,
+      "icon": "coin",
+      "requiredClass": [
+        "merchant"
+      ]
+    },
+    {
+      "id": "arm_r_1",
+      "name": "騎士の鎧",
+      "type": "armor",
+      "rarity": "R",
+      "description": "誤答ダメージを2回防ぐ。",
+      "effectType": "SHIELD",
+      "effectValue": 2,
+      "icon": "armor",
+      "requiredClass": [
+        "warrior"
+      ]
+    },
+    {
+      "id": "wpn_r_2",
+      "name": "炎の指輪",
+      "type": "weapon",
+      "rarity": "R",
+      "description": "開幕時に10%の確率で敵1体を自動撃破する。",
+      "effectType": "QUICK_KILL",
+      "effectValue": 10,
+      "icon": "ring"
+    },
+    {
+      "id": "wpn_r_3",
+      "name": "黄金のそろばん",
+      "type": "weapon",
+      "rarity": "R",
+      "description": "商人が使う黄金の計算具。商人専用。",
+      "effectType": "EXP_BOOST",
+      "effectValue": 10,
+      "icon": "calculator",
+      "requiredClass": [
+        "merchant"
+      ]
+    },
+    {
+      "id": "wpn_sr_1",
+      "name": "大魔導士の聖杖",
+      "type": "weapon",
+      "rarity": "SR",
+      "description": "膨大な魔力が宿る。魔法使い専用。EXP獲得量+15%。",
+      "effectType": "EXP_BOOST",
+      "effectValue": 15,
+      "icon": "staff",
+      "requiredClass": [
+        "mage"
+      ]
+    },
+    {
+      "id": "arm_sr_1",
+      "name": "ミスリルアーマー",
+      "type": "armor",
+      "rarity": "SR",
+      "description": "とても硬い。誤答ダメージを3回防ぐ。",
+      "effectType": "SHIELD",
+      "effectValue": 3,
+      "icon": "armor-shiny",
+      "requiredClass": [
+        "warrior"
+      ]
+    },
+    {
+      "id": "arm_sr_2",
+      "name": "賢者のローブ",
+      "type": "armor",
+      "rarity": "SR",
+      "description": "高い防御力を誇る。魔法使い専用。",
+      "effectType": "SHIELD",
+      "effectValue": 3,
+      "icon": "shirt",
+      "requiredClass": [
+        "mage"
+      ]
+    },
+    {
+      "id": "acc_sr_1",
+      "name": "時の懐中時計",
+      "type": "accessory",
+      "rarity": "SR",
+      "description": "時を操る。敵の進行を15%遅らせる。",
+      "effectType": "TIME_SLOW",
+      "effectValue": 15,
+      "icon": "pocket-watch"
+    },
+    {
+      "id": "acc_sr_2",
+      "name": "商人の金言辞典",
+      "type": "accessory",
+      "rarity": "SR",
+      "description": "獲得EXPを10%高め、チケット効率も上げる。商人専用。",
+      "effectType": "EXP_BOOST",
+      "effectValue": 10,
+      "icon": "book",
+      "requiredClass": [
+        "merchant"
+      ]
+    },
+    {
+      "id": "wpn_sr_2",
+      "name": "雷光の剣",
+      "type": "weapon",
+      "rarity": "SR",
+      "description": "開幕ダッシュ確定。敵1体を即座に撃破。戦士専用。",
+      "effectType": "QUICK_KILL",
+      "effectValue": 100,
+      "icon": "sword-lightning",
+      "requiredClass": [
+        "warrior"
+      ]
+    },
+    {
+      "id": "wpn_ssr_1",
+      "name": "叡智の王笏",
+      "type": "weapon",
+      "rarity": "SSR",
+      "description": "思考を別次元へ。魔法使い専用。EXP獲得量+30%。",
+      "effectType": "EXP_BOOST",
+      "effectValue": 30,
+      "icon": "scepter",
+      "requiredClass": [
+        "mage"
+      ]
+    },
+    {
+      "id": "arm_ssr_1",
+      "name": "聖竜の加護盾",
+      "type": "armor",
+      "rarity": "SSR",
+      "description": "絶対防御。戦士専用。誤答ダメージを5回防ぐ。",
+      "effectType": "SHIELD",
+      "effectValue": 5,
+      "icon": "shield-dragon",
+      "requiredClass": [
+        "warrior"
+      ]
+    },
+    {
+      "id": "acc_ssr_1",
+      "name": "時空の砂時計",
+      "type": "accessory",
+      "rarity": "SSR",
+      "description": "敵の進行を30%遅延させ、絶対的な余裕を生む。",
+      "effectType": "TIME_SLOW",
+      "effectValue": 30,
+      "icon": "hourglass"
+    },
+    {
+      "id": "wpn_ssr_2",
+      "name": "エクスカリバー",
+      "type": "weapon",
+      "rarity": "SSR",
+      "description": "聖なる剣。開幕2体の敵を一掃する。戦士専用。",
+      "effectType": "QUICK_KILL",
+      "effectValue": 200,
+      "icon": "sword-holy",
+      "requiredClass": [
+        "warrior"
+      ]
+    },
+    {
+      "id": "wpn_ssr_3",
+      "name": "奇跡のレジスター",
+      "type": "weapon",
+      "rarity": "SSR",
+      "description": "究極の商売道具。商人専用。EXPとチケットを大幅アップ。",
+      "effectType": "TICKET_DROP",
+      "effectValue": 50,
+      "icon": "monitor",
+      "requiredClass": [
+        "merchant"
+      ]
+    },
+    {
+      "id": "acc_ssr_2",
+      "name": "伝説の販売士バッジ",
+      "type": "accessory",
+      "rarity": "SSR",
+      "description": "資格の極意。EXP獲得量+50%。商人専用。",
+      "effectType": "EXP_BOOST",
+      "effectValue": 50,
+      "icon": "badge",
+      "requiredClass": [
+        "merchant"
+      ]
+    }
+  ],
+  "characters": {
+    "warrior": {
+      "id": "warrior",
+      "name": "戦士の道",
+      "description": "地道な努力で徐々に力をつける道です。販売の基礎を固めます。",
+      "stages": [
+        {
+          "level": 1,
+          "name": "農民",
+          "imageUrl": "/images/chara/農民.png",
+          "stats": {
+            "hp": 10,
+            "atk": 5,
+            "def": 3,
+            "spd": 2
+          }
+        },
+        {
+          "level": 5,
+          "name": "兵士",
+          "imageUrl": "/images/chara/兵士.png",
+          "stats": {
+            "hp": 30,
+            "atk": 18,
+            "def": 12,
+            "spd": 5
+          }
+        },
+        {
+          "level": 10,
+          "name": "騎士",
+          "imageUrl": "/images/chara/騎士.png",
+          "stats": {
+            "hp": 60,
+            "atk": 40,
+            "def": 30,
+            "spd": 10
+          }
+        }
+      ]
+    },
+    "mage": {
+      "id": "mage",
+      "name": "魔法使いの道",
+      "description": "知識を蓄え、知恵を巡らせる道です。マーケティングに強くなります。",
+      "stages": [
+        {
+          "level": 1,
+          "name": "見習い",
+          "imageUrl": "/images/chara/見習い魔法使い.png",
+          "stats": {
+            "hp": 6,
+            "atk": 8,
+            "def": 2,
+            "spd": 3
+          }
+        },
+        {
+          "level": 5,
+          "name": "魔法使い",
+          "imageUrl": "/images/chara/ベテラン魔法使い.png",
+          "stats": {
+            "hp": 18,
+            "atk": 28,
+            "def": 8,
+            "spd": 7
+          }
+        },
+        {
+          "level": 10,
+          "name": "大魔導士",
+          "imageUrl": "/images/chara/大賢者.png",
+          "stats": {
+            "hp": 35,
+            "atk": 55,
+            "def": 18,
+            "spd": 14
+          }
+        }
+      ]
+    },
+    "merchant": {
+      "id": "merchant",
+      "name": "商人の道",
+      "description": "販売のプロから豊かさを築く道です。接客サービスの極意を学びます。",
+      "stages": [
+        {
+          "level": 1,
+          "name": "行商人",
+          "imageUrl": "/images/chara/商人.png",
+          "stats": {
+            "hp": 8,
+            "atk": 4,
+            "def": 4,
+            "spd": 5
+          }
+        },
+        {
+          "level": 5,
+          "name": "豪商",
+          "imageUrl": "/images/chara/冒険者.png",
+          "stats": {
+            "hp": 22,
+            "atk": 14,
+            "def": 12,
+            "spd": 16
+          }
+        },
+        {
+          "level": 10,
+          "name": "大富豪",
+          "imageUrl": "/images/chara/大富豪.png",
+          "stats": {
+            "hp": 45,
+            "atk": 30,
+            "def": 25,
+            "spd": 30
+          }
+        }
+      ]
+    }
+  },
+  "skills": {
+    "warrior": [
+      {
+        "id": "w_slash",
+        "name": "強斬り",
+        "description": "敵単体に2倍ダメージ。",
+        "spCost": 5,
+        "requiredLevel": 2,
+        "type": "active",
+        "color": "from-orange-500 to-red-600",
+        "mpCost": 15,
+        "targetType": "single",
+        "damageMultiplier": 2,
+        "effectId": "power_slash"
+      },
+      {
+        "id": "w_shield",
+        "name": "防御の構え",
+        "description": "次のダメージを1回無効化。",
+        "spCost": 8,
+        "requiredLevel": 3,
+        "type": "active",
+        "color": "from-blue-500 to-indigo-600",
+        "mpCost": 20,
+        "targetType": "self",
+        "effectId": "shield"
+      },
+      {
+        "id": "w_passive_atk",
+        "name": "筋力強化",
+        "description": "攻撃力が10%増加。",
+        "spCost": 10,
+        "requiredLevel": 4,
+        "type": "passive",
+        "color": "from-gray-600 to-gray-800"
+      },
+      {
+        "id": "w_cross",
+        "name": "クロス斬り",
+        "description": "敵全体に1.5倍ダメージ。",
+        "spCost": 15,
+        "requiredLevel": 5,
+        "requiredSkillId": "w_slash",
+        "type": "active",
+        "color": "from-orange-600 to-red-700",
+        "mpCost": 30,
+        "targetType": "all",
+        "damageMultiplier": 1.5,
+        "effectId": "cross_slash"
+      }
+    ],
+    "mage": [
+      {
+        "id": "m_fire",
+        "name": "ファイアボール",
+        "description": "敵単体に1.8倍の炎ダメージ。",
+        "spCost": 5,
+        "requiredLevel": 2,
+        "type": "active",
+        "color": "from-orange-500 to-red-600",
+        "mpCost": 15,
+        "targetType": "single",
+        "damageMultiplier": 1.8,
+        "effectId": "fireball"
+      },
+      {
+        "id": "m_shield",
+        "name": "マナシールド",
+        "description": "次のダメージを1回無効化。",
+        "spCost": 8,
+        "requiredLevel": 3,
+        "type": "active",
+        "color": "from-blue-500 to-indigo-600",
+        "mpCost": 20,
+        "targetType": "self",
+        "effectId": "shield"
+      },
+      {
+        "id": "m_passive_int",
+        "name": "魔力強化",
+        "description": "魔法攻撃力が増加。",
+        "spCost": 10,
+        "requiredLevel": 4,
+        "type": "passive",
+        "color": "from-purple-600 to-purple-800"
+      },
+      {
+        "id": "m_blizzard",
+        "name": "ブリザード",
+        "description": "敵全体に持続ダメージ＋速度低下。",
+        "spCost": 12,
+        "requiredLevel": 5,
+        "requiredSkillId": "m_fire",
+        "type": "active",
+        "color": "from-sky-400 to-blue-600",
+        "mpCost": 25,
+        "targetType": "dot",
+        "damageMultiplier": 1.2,
+        "dotDuration": 300,
+        "dotInterval": 60,
+        "effectId": "blizzard"
+      }
+    ],
+    "merchant": [
+      {
+        "id": "me_coin",
+        "name": "コイントス",
+        "description": "2体に1.5倍ダメージ。",
+        "spCost": 5,
+        "requiredLevel": 2,
+        "type": "active",
+        "color": "from-amber-400 to-yellow-600",
+        "mpCost": 10,
+        "targetType": "multi",
+        "damageMultiplier": 1.5,
+        "hitCount": 2,
+        "effectId": "coin_toss"
+      },
+      {
+        "id": "me_bribe",
+        "name": "ワイロ",
+        "description": "先頭の敵を即死（ボス以外）。",
+        "spCost": 10,
+        "requiredLevel": 3,
+        "type": "active",
+        "color": "from-green-500 to-emerald-600",
+        "mpCost": 30,
+        "targetType": "single",
+        "damageMultiplier": 99,
+        "effectId": "bribe"
+      },
+      {
+        "id": "me_passive_gold",
+        "name": "交渉術",
+        "description": "ガチャチケ効率アップ。",
+        "spCost": 12,
+        "requiredLevel": 4,
+        "type": "passive",
+        "color": "from-yellow-600 to-amber-800"
+      },
+      {
+        "id": "me_deal",
+        "name": "ビッグディール",
+        "description": "敵全体に2倍ダメージ。",
+        "spCost": 15,
+        "requiredLevel": 5,
+        "requiredSkillId": "me_coin",
+        "type": "active",
+        "color": "from-yellow-500 to-amber-700",
+        "mpCost": 35,
+        "targetType": "all",
+        "damageMultiplier": 2,
+        "effectId": "big_deal"
+      }
+    ]
+  },
+  "partners": {
+    "eggGacha": {
+      "cost": 1,
+      "rates": {
+        "SSR": 0.5,
+        "SR": 3,
+        "R": 16.5,
+        "N": 80
+      }
+    },
+    "fusionRequirement": 3,
+    "list": [
+      {
+        "id": "1",
+        "name": "ドラゴン",
+        "rarity": "SSR",
+        "description": "伝説の竜",
+        "stages": [
+          {
+            "level": 1,
+            "name": "ドラゴン",
+            "imageUrl": "/images/partner/dragon.png",
+            "stats": {
+              "hp": 100,
+              "atk": 50,
+              "def": 30,
+              "tdAttackInterval": 5
+            },
+            "mergedCount": 0
+          }
+        ]
+      },
+      {
+        "id": "2",
+        "name": "狐",
+        "rarity": "SSR",
+        "description": "妖狐",
+        "stages": [
+          {
+            "level": 1,
+            "name": "狐",
+            "imageUrl": "/images/partner/fox.png",
+            "stats": {
+              "hp": 80,
+              "atk": 60,
+              "def": 20,
+              "tdAttackInterval": 3
+            },
+            "mergedCount": 0
+          }
+        ]
+      },
+      {
+        "id": "3",
+        "name": "亀",
+        "rarity": "SSR",
+        "description": "古代亀",
+        "stages": [
+          {
+            "level": 1,
+            "name": "亀",
+            "imageUrl": "/images/partner/turtle.png",
+            "stats": {
+              "hp": 150,
+              "atk": 20,
+              "def": 80,
+              "tdAttackInterval": 7
+            },
+            "mergedCount": 0
+          }
+        ]
+      },
+      {
+        "id": "4",
+        "name": "虎",
+        "rarity": "SSR",
+        "description": "白虎",
+        "stages": [
+          {
+            "level": 1,
+            "name": "虎",
+            "imageUrl": "/images/partner/tiger.png",
+            "stats": {
+              "hp": 110,
+              "atk": 55,
+              "def": 25,
+              "tdAttackInterval": 4
+            },
+            "mergedCount": 0
+          }
+        ]
+      },
+      {
+        "id": "5",
+        "name": "赤の精霊",
+        "rarity": "SR",
+        "description": "炎を操る精霊",
+        "stages": [
+          {
+            "level": 1,
+            "name": "赤の精霊",
+            "imageUrl": "/images/partner/red.png",
+            "stats": {
+              "hp": 60,
+              "atk": 40,
+              "def": 15,
+              "tdAttackInterval": 4
+            },
+            "mergedCount": 0
+          }
+        ]
+      },
+      {
+        "id": "6",
+        "name": "緑の精霊",
+        "rarity": "SR",
+        "description": "風を操る精霊",
+        "stages": [
+          {
+            "level": 1,
+            "name": "緑の精霊",
+            "imageUrl": "/images/partner/green.png",
+            "stats": {
+              "hp": 60,
+              "atk": 35,
+              "def": 20,
+              "tdAttackInterval": 3
+            },
+            "mergedCount": 0
+          }
+        ]
+      },
+      {
+        "id": "7",
+        "name": "青の精霊",
+        "rarity": "SR",
+        "description": "水を操る精霊",
+        "stages": [
+          {
+            "level": 1,
+            "name": "青の精霊",
+            "imageUrl": "/images/partner/blue.png",
+            "stats": {
+              "hp": 70,
+              "atk": 30,
+              "def": 30,
+              "tdAttackInterval": 5
+            },
+            "mergedCount": 0
+          }
+        ]
+      },
+      {
+        "id": "8",
+        "name": "紫の魔獣",
+        "rarity": "R",
+        "description": "闇の魔獣",
+        "stages": [
+          {
+            "level": 1,
+            "name": "紫の魔獣",
+            "imageUrl": "/images/partner/purple.png",
+            "stats": {
+              "hp": 50,
+              "atk": 25,
+              "def": 15,
+              "tdAttackInterval": 5
+            },
+            "mergedCount": 0
+          }
+        ]
+      },
+      {
+        "id": "9",
+        "name": "白の聖獣",
+        "rarity": "R",
+        "description": "光の聖獣",
+        "stages": [
+          {
+            "level": 1,
+            "name": "白の聖獣",
+            "imageUrl": "/images/partner/white.png",
+            "stats": {
+              "hp": 50,
+              "atk": 15,
+              "def": 25,
+              "tdAttackInterval": 6
+            },
+            "mergedCount": 0
+          }
+        ]
+      },
+      {
+        "id": "10",
+        "name": "黒の幻獣",
+        "rarity": "R",
+        "description": "影の幻獣",
+        "stages": [
+          {
+            "level": 1,
+            "name": "黒の幻獣",
+            "imageUrl": "/images/partner/black.png",
+            "stats": {
+              "hp": 45,
+              "atk": 30,
+              "def": 10,
+              "tdAttackInterval": 4
+            },
+            "mergedCount": 0
+          }
+        ]
+      },
+      {
+        "id": "11",
+        "name": "岩のゴーレム",
+        "rarity": "N",
+        "description": "硬い岩の魔物",
+        "stages": [
+          {
+            "level": 1,
+            "name": "岩のゴーレム",
+            "imageUrl": "/images/partner/rock.png",
+            "stats": {
+              "hp": 80,
+              "atk": 15,
+              "def": 40,
+              "tdAttackInterval": 6
+            },
+            "mergedCount": 0
+          }
+        ]
+      },
+      {
+        "id": "12",
+        "name": "土のスピリット",
+        "rarity": "N",
+        "description": "大地の精霊",
+        "stages": [
+          {
+            "level": 1,
+            "name": "土のスピリット",
+            "imageUrl": "/images/partner/soil.png",
+            "stats": {
+              "hp": 60,
+              "atk": 10,
+              "def": 20,
+              "tdAttackInterval": 5
+            },
+            "mergedCount": 0
+          }
+        ]
+      },
+      {
+        "id": "13",
+        "name": "大地の巨神",
+        "rarity": "SR",
+        "description": "全てを護る大地の化身",
+        "stages": [
+          {
+            "level": 1,
+            "name": "大地の巨神",
+            "imageUrl": "/images/partner/earth_titan.png",
+            "stats": {
+              "hp": 200,
+              "atk": 25,
+              "def": 120,
+              "tdAttackInterval": 8
+            },
+            "mergedCount": 0
+          }
+        ]
+      },
+      {
+        "id": "14",
+        "name": "陰陽の獣",
+        "rarity": "SR",
+        "description": "光と闇を統べる魔獣",
+        "stages": [
+          {
+            "level": 1,
+            "name": "陰陽の獣",
+            "imageUrl": "/images/partner/yin_yang_beast.png",
+            "stats": {
+              "hp": 80,
+              "atk": 85,
+              "def": 25,
+              "tdAttackInterval": 3
+            },
+            "mergedCount": 0
+          }
+        ]
+      },
+      {
+        "id": "15",
+        "name": "虹の精霊王",
+        "rarity": "SSR",
+        "description": "万物を司る究極の精霊王",
+        "stages": [
+          {
+            "level": 1,
+            "name": "虹の精霊王",
+            "imageUrl": "/images/partner/elemental_king.png",
+            "stats": {
+              "hp": 120,
+              "atk": 70,
+              "def": 50,
+              "tdAttackInterval": 4
+            },
+            "mergedCount": 0
+          }
+        ]
+      }
+    ]
+  }
+}
