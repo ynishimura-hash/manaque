@@ -3,20 +3,22 @@ import { NextRequest, NextResponse } from 'next/server';
 import { cookies } from 'next/headers';
 import { createServerClient } from '@supabase/ssr';
 
-// Supabase Admin client（RLSをバイパス）
-const supabaseAdmin = createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.SUPABASE_SERVICE_ROLE_KEY!,
-    {
-        auth: {
-            autoRefreshToken: false,
-            persistSession: false
+function getSupabaseAdmin() {
+    return createClient(
+        process.env.NEXT_PUBLIC_SUPABASE_URL!,
+        process.env.SUPABASE_SERVICE_ROLE_KEY!,
+        {
+            auth: {
+                autoRefreshToken: false,
+                persistSession: false
+            }
         }
-    }
-);
+    );
+}
 
 export async function GET(request: NextRequest) {
     try {
+        const supabaseAdmin = getSupabaseAdmin();
         // Cookieからセッションを取得
         const cookieStore = await cookies();
         const supabase = createServerClient(
@@ -62,6 +64,7 @@ export async function GET(request: NextRequest) {
 // 既存のPOSTも残しておく（互換性のため）
 export async function POST(request: NextRequest) {
     try {
+        const supabaseAdmin = getSupabaseAdmin();
         const { userId } = await request.json();
 
         if (!userId) {
