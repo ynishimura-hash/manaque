@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { Suspense, useState, useEffect, useRef } from 'react';
 import { useGamificationStore } from '@/store/useGamificationStore';
 import { useAppStore } from '@/lib/appStore';
 import { getEquipmentDetails } from '@/config/rpgItems';
@@ -8,14 +8,14 @@ import { ArrowLeft, Sword, Shield, Zap, Sparkles, Heart, MapPin, Lock, CheckCirc
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import toast from 'react-hot-toast';
-import dynamic from 'next/dynamic';
+import dynamicImport from 'next/dynamic';
 
 import { CHARACTER_DATA, getStatsForLevel } from '@/components/gamification/characterData';
 import { getSkillById } from '@/config/skillData';
 import type { SkillDef } from '@/config/skillData';
 import type { PixiBattleHandle } from './PixiBattleView';
 
-const PixiBattleView = dynamic(() => import('./PixiBattleView'), { ssr: false });
+const PixiBattleView = dynamicImport(() => import('./PixiBattleView'), { ssr: false });
 
 interface Enemy {
     id: string;
@@ -107,7 +107,7 @@ const MOCK_QUESTIONS = [
     { q: "「損益分岐点」とは何か？", options: ["利益が最大になる点", "売上と費用が等しくなる点", "限界利益がゼロの点", "変動費がゼロの点"], answer: 1 },
 ];
 
-export default function TowerDefensePage() {
+function TowerDefenseContent() {
     const searchParams = useSearchParams();
     const isTestMode = searchParams?.get('test') === '1';
 
@@ -1168,5 +1168,13 @@ export default function TowerDefensePage() {
                 </main>
             </div>
         </React.Suspense >
+    );
+}
+
+export default function TowerDefensePage() {
+    return (
+        <Suspense fallback={<div className="flex items-center justify-center min-h-screen bg-slate-900"><div className="w-10 h-10 border-4 border-blue-500 border-t-transparent rounded-full animate-spin" /></div>}>
+            <TowerDefenseContent />
+        </Suspense>
     );
 }
