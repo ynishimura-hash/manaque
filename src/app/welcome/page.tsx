@@ -1,117 +1,109 @@
 "use client";
 
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { ArrowLeft, User, Building2, Sparkles, ArrowRight } from 'lucide-react';
-import { useAppStore } from '@/lib/appStore';
+import { GraduationCap, Lock, Eye, EyeOff } from 'lucide-react';
+
+const PASSCODE = process.env.NEXT_PUBLIC_APP_PASSCODE || 'manaque2025';
+const STORAGE_KEY = 'manaque_unlocked';
 
 export default function WelcomePage() {
     const router = useRouter();
-    const { authStatus, activeRole } = useAppStore();
+    const [input, setInput] = useState('');
+    const [showPassword, setShowPassword] = useState(false);
+    const [error, setError] = useState('');
+    const [shaking, setShaking] = useState(false);
 
-    // If already authenticated, this page doesn't make sense, but we keep it simple for now.
+    useEffect(() => {
+        if (typeof window !== 'undefined' && localStorage.getItem(STORAGE_KEY) === 'true') {
+            router.replace('/dashboard');
+        }
+    }, [router]);
+
+    const handleSubmit = (e: React.FormEvent) => {
+        e.preventDefault();
+        if (input === PASSCODE) {
+            localStorage.setItem(STORAGE_KEY, 'true');
+            router.replace('/dashboard');
+        } else {
+            setError('パスコードが違います');
+            setShaking(true);
+            setInput('');
+            setTimeout(() => setShaking(false), 500);
+        }
+    };
 
     return (
-        <div className="min-h-screen bg-slate-50 relative">
-            {/* Visual Header Area */}
-            <div className="relative bg-blue-700 pb-32 pt-20 px-6 overflow-hidden">
-                {/* Background Pattern */}
-                <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 brightness-100 contrast-150 mix-blend-overlay"></div>
-                <div className="absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 bg-blue-600 rounded-full blur-3xl opacity-50"></div>
-                <div className="absolute bottom-0 left-0 -ml-20 -mb-20 w-80 h-80 bg-cyan-400 rounded-full blur-3xl opacity-30"></div>
+        <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-950 to-indigo-900 flex items-center justify-center p-4">
+            {/* 背景装飾 */}
+            <div className="fixed inset-0 pointer-events-none overflow-hidden">
+                <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-600/10 rounded-full blur-3xl" />
+                <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-indigo-600/10 rounded-full blur-3xl" />
+            </div>
 
-                <div className="relative z-10 max-w-5xl mx-auto text-center space-y-6">
-                    <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-white leading-tight tracking-tight pt-10">
-                        ログイン・新規登録
-                    </h1>
-                    <p className="text-blue-100 text-lg md:text-xl font-bold max-w-2xl mx-auto leading-relaxed">
-                        あなたの可能性を広げる、新しい一歩を。
-                    </p>
+            <div
+                className={`relative w-full max-w-sm bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-8 shadow-2xl ${shaking ? 'animate-[shake_0.5s_ease-in-out]' : ''}`}
+                style={shaking ? { animation: 'shake 0.5s ease-in-out' } : {}}
+            >
+                {/* ロゴ */}
+                <div className="flex flex-col items-center mb-8">
+                    <div className="w-16 h-16 bg-blue-600 rounded-2xl flex items-center justify-center mb-4 shadow-lg shadow-blue-600/30">
+                        <GraduationCap size={32} className="text-white" />
+                    </div>
+                    <h1 className="text-2xl font-black text-white tracking-tight">マナクエ</h1>
+                    <p className="text-blue-300 text-sm font-bold mt-1">学んで、強くなれ。</p>
                 </div>
 
-                <div className="absolute top-6 left-6 z-20">
+                {/* パスコードフォーム */}
+                <form onSubmit={handleSubmit} className="space-y-4">
+                    <div>
+                        <label className="block text-sm font-bold text-slate-300 mb-2">
+                            <Lock size={14} className="inline mr-1" />
+                            パスコードを入力
+                        </label>
+                        <div className="relative">
+                            <input
+                                type={showPassword ? 'text' : 'password'}
+                                value={input}
+                                onChange={(e) => {
+                                    setInput(e.target.value);
+                                    setError('');
+                                }}
+                                placeholder="パスコード"
+                                autoFocus
+                                className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-slate-500 font-bold focus:outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-400/20 transition-all pr-12"
+                            />
+                            <button
+                                type="button"
+                                onClick={() => setShowPassword(!showPassword)}
+                                className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-white transition-colors"
+                            >
+                                {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                            </button>
+                        </div>
+                        {error && (
+                            <p className="text-red-400 text-sm font-bold mt-2">{error}</p>
+                        )}
+                    </div>
+
                     <button
-                        onClick={() => router.push('/')}
-                        className="flex items-center gap-2 text-white/80 hover:text-white font-bold transition-colors bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full"
+                        type="submit"
+                        className="w-full bg-blue-600 hover:bg-blue-500 text-white font-black py-3 rounded-xl transition-all active:scale-95 shadow-lg shadow-blue-600/30"
                     >
-                        <ArrowLeft size={18} />
-                        <span className="text-sm">トップへ戻る</span>
+                        入室する
                     </button>
-                </div>
+                </form>
             </div>
 
-            {/* Content Area (Overlapping Cards) */}
-            <div className="relative z-20 max-w-5xl mx-auto px-6 -mt-24 pb-20">
-                <div className="grid md:grid-cols-2 gap-6 md:gap-8">
-                    {/* Seeker Card */}
-                    <div className="bg-white rounded-[2.5rem] p-8 md:p-10 shadow-xl shadow-blue-900/10 hover:shadow-2xl hover:translate-y-[-4px] transition-all group flex flex-col h-full relative overflow-hidden">
-                        <div className="item-bg absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-cyan-50 to-transparent rounded-bl-[100px] -mr-10 -mt-10 opacity-50 transition-transform group-hover:scale-110" />
-
-                        <div className="flex-1 cursor-pointer relative z-10" onClick={() => router.push('/login/seeker')}>
-                            <div className="w-16 h-16 bg-cyan-100 text-cyan-600 rounded-2xl flex items-center justify-center mb-6 group-hover:rotate-6 transition-transform shadow-inner">
-                                <User size={32} strokeWidth={2.5} />
-                            </div>
-                            <h2 className="text-2xl font-black text-slate-800 mb-3 group-hover:text-cyan-800 transition-colors">学生/社会人の方</h2>
-                            <p className="text-slate-500 font-bold text-sm mb-8 leading-relaxed">
-                                自分の魅力を発見し、<br />
-                                可能性を広げていきましょう。
-                            </p>
-                        </div>
-                        <div className="space-y-3 mt-auto relative z-10">
-                            <button
-                                onClick={() => router.push('/login/seeker')}
-                                className="w-full bg-slate-900 text-white font-black py-4 rounded-2xl hover:bg-slate-800 transition-all flex items-center justify-center gap-2 shadow-lg hover:shadow-xl active:scale-95"
-                            >
-                                ログイン
-                                <ArrowRight size={18} />
-                            </button>
-                            <button
-                                onClick={(e) => { e.stopPropagation(); router.push('/register/seeker'); }}
-                                className="w-full bg-white border-2 border-slate-100 text-slate-500 font-black py-4 rounded-2xl hover:bg-cyan-50 hover:text-cyan-800 hover:border-cyan-300 transition-all flex items-center justify-center gap-2 active:scale-95"
-                            >
-                                まだ登録していない方はこちら
-                            </button>
-                        </div>
-                    </div>
-
-                    {/* Company Card */}
-                    <div className="bg-white rounded-[2.5rem] p-8 md:p-10 shadow-xl shadow-blue-900/10 hover:shadow-2xl hover:translate-y-[-4px] transition-all group flex flex-col h-full relative overflow-hidden">
-                        <div className="item-bg absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-blue-50 to-transparent rounded-bl-[100px] -mr-10 -mt-10 opacity-50 transition-transform group-hover:scale-110" />
-
-                        <div className="flex-1 cursor-pointer relative z-10" onClick={() => router.push('/login/company')}>
-                            <div className="w-16 h-16 bg-blue-100 text-blue-600 rounded-2xl flex items-center justify-center mb-6 group-hover:-rotate-6 transition-transform shadow-inner">
-                                <Building2 size={32} strokeWidth={2.5} />
-                            </div>
-                            <h2 className="text-2xl font-black text-slate-800 mb-3 group-hover:text-blue-700 transition-colors">企業/パートナーの方</h2>
-                            <p className="text-slate-500 font-bold text-sm mb-8 leading-relaxed">
-                                自社の魅力を動画やクエストで発信し、<br />
-                                共感で繋がる仲間を集めましょう。
-                            </p>
-                        </div>
-                        <div className="space-y-3 mt-auto relative z-10">
-                            <button
-                                onClick={() => router.push('/login/company')}
-                                className="w-full bg-slate-900 text-white font-black py-4 rounded-2xl hover:bg-slate-800 transition-all flex items-center justify-center gap-2 shadow-lg hover:shadow-xl active:scale-95"
-                            >
-                                ログイン
-                                <ArrowRight size={18} />
-                            </button>
-                            <button
-                                onClick={(e) => { e.stopPropagation(); router.push('/organizations/register'); }}
-                                className="w-full bg-white border-2 border-slate-100 text-slate-500 font-black py-4 rounded-2xl hover:bg-blue-50 hover:text-blue-700 hover:border-blue-300 transition-all flex items-center justify-center gap-2 active:scale-95"
-                            >
-                                まだ登録していない方はこちら
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <div className="mt-12 text-center">
-                    <p className="text-xs font-bold text-slate-400">
-                        © 2026 Ehime Base Project. All rights reserved.
-                    </p>
-                </div>
-            </div>
+            <style jsx global>{`
+                @keyframes shake {
+                    0%, 100% { transform: translateX(0); }
+                    20% { transform: translateX(-8px); }
+                    40% { transform: translateX(8px); }
+                    60% { transform: translateX(-6px); }
+                    80% { transform: translateX(6px); }
+                }
+            `}</style>
         </div>
     );
 }
