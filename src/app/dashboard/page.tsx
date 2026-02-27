@@ -9,8 +9,8 @@ import { getSkillById } from '@/config/skillData';
 import {
     Sword, Shield, Target, PlayCircle, Star, Sparkles,
     Ticket, Zap, ChevronUp, ChevronDown, Lock, BookOpen,
-    Wand2, Calculator, Gem, Eye, Crown, Watch, Book, Monitor, Award,
-    Glasses, Coins, CircleDot, Swords, Bug, RefreshCw
+    Wand2, Calculator, Watch, Book, Award,
+    Glasses, Coins, CircleDot, Swords, RefreshCw
 } from 'lucide-react';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -354,24 +354,24 @@ export default function SeekerDashboard() {
             <main className="max-w-4xl mx-auto p-4 md:p-6 space-y-6 relative z-10">
                 <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="space-y-6">
 
-                    {/* キャラクター＆装備エリア */}
-                    <div className="bg-slate-800/40 border border-slate-700/50 rounded-[2rem] p-5 lg:p-6 backdrop-blur-sm relative overflow-hidden">
+                    {/* キャラクター＆装備エリア — モバイル: 左右2カラム */}
+                    <div className="bg-slate-800/40 border border-slate-700/50 rounded-[2rem] p-3 md:p-5 lg:p-6 backdrop-blur-sm relative overflow-hidden">
                         <div className="absolute right-[-5%] top-[-10%] opacity-5 text-indigo-500">
                             <Shield size={200} />
                         </div>
 
-                        <div className="flex flex-col md:flex-row gap-6 items-center">
-                            {/* アバター表示 */}
-                            <div className="flex-1 flex flex-col items-center justify-center p-2">
+                        <div className="flex flex-row gap-3 md:gap-6 items-start">
+                            {/* 左: アバター + ステータス */}
+                            <div className="flex-1 flex flex-col items-center justify-center p-1 md:p-2">
                                 <button
                                     onClick={() => setShowEvolutionModal(true)}
-                                    className="w-36 h-36 bg-gradient-to-b from-indigo-500/20 to-slate-900/80 rounded-full flex items-center justify-center border-4 border-slate-700 shadow-[0_0_30px_rgba(79,70,229,0.2)] mb-3 relative p-2 group hover:border-indigo-500 transition-colors cursor-pointer"
+                                    className="w-20 h-20 md:w-36 md:h-36 bg-gradient-to-b from-indigo-500/20 to-slate-900/80 rounded-full flex items-center justify-center border-4 border-slate-700 shadow-[0_0_30px_rgba(79,70,229,0.2)] mb-2 relative p-1 md:p-2 group hover:border-indigo-500 transition-colors cursor-pointer"
                                     title="クリックで進化ツリーを確認"
                                 >
                                     {characterImage ? (
                                         <img src={characterImage} alt={currentStage?.name || 'Hero'} className="w-full h-full object-contain drop-shadow-lg group-hover:scale-110 transition-transform duration-300" />
                                     ) : (
-                                        <Shield size={56} className="text-slate-500 drop-shadow-md" />
+                                        <Shield size={40} className="text-slate-500 drop-shadow-md md:hidden" />
                                     )}
                                     <svg viewBox="0 0 144 144" className="absolute inset-0 w-full h-full -rotate-90 pointer-events-none overflow-visible">
                                         <circle cx="72" cy="72" r="68" stroke="currentColor" strokeWidth="4" fill="transparent" className="text-slate-800/50" />
@@ -380,50 +380,48 @@ export default function SeekerDashboard() {
                                 </button>
 
                                 <div className="text-center w-full">
-                                    <p className="text-xs font-black text-slate-400 uppercase tracking-widest mb-0.5">EXP</p>
-                                    <p className="text-lg font-black text-white mb-2">{exp} <span className="text-sm text-slate-500 font-bold">/ Next 100</span></p>
+                                    <p className="text-[9px] font-black text-slate-400 uppercase tracking-widest mb-0.5">EXP {exp}/100</p>
 
                                     {/* レベル増減ボタン（デモ用） */}
-                                    <div className="flex items-center justify-center gap-2 mb-3">
+                                    <div className="flex items-center justify-center gap-1 md:gap-2 mb-2">
                                         <button onClick={() => handleLevelChange(-1)} disabled={level <= 1}
-                                            className="w-8 h-8 bg-slate-700 hover:bg-slate-600 rounded-full flex items-center justify-center text-white disabled:opacity-30 transition-colors">
-                                            <ChevronDown size={16} />
+                                            className="w-6 h-6 md:w-8 md:h-8 bg-slate-700 hover:bg-slate-600 rounded-full flex items-center justify-center text-white disabled:opacity-30 transition-colors">
+                                            <ChevronDown size={12} />
                                         </button>
-                                        <span className="text-sm font-black text-indigo-400 w-16 text-center">Lv.{level} / 10</span>
+                                        <span className="text-xs font-black text-indigo-400 w-14 text-center">Lv.{level}/10</span>
                                         <button onClick={() => handleLevelChange(1)} disabled={level >= 10}
-                                            className="w-8 h-8 bg-slate-700 hover:bg-slate-600 rounded-full flex items-center justify-center text-white disabled:opacity-30 transition-colors">
-                                            <ChevronUp size={16} />
+                                            className="w-6 h-6 md:w-8 md:h-8 bg-slate-700 hover:bg-slate-600 rounded-full flex items-center justify-center text-white disabled:opacity-30 transition-colors">
+                                            <ChevronUp size={12} />
                                         </button>
                                     </div>
 
                                     {/* ステータス */}
                                     {interpolatedStats && (
-                                        <div className="grid grid-cols-4 gap-1.5 w-full max-w-[220px] mx-auto bg-slate-900/50 p-2 rounded-xl border border-slate-700/50">
-                                            <div className="flex flex-col items-center">
+                                        <div className="grid grid-cols-2 gap-1 w-full bg-slate-900/50 p-1.5 rounded-xl border border-slate-700/50">
+                                            <div className="flex justify-between items-center px-1">
                                                 <span className="text-[8px] text-slate-500 font-bold">HP</span>
-                                                <span className="text-emerald-400 font-black text-xs">{interpolatedStats.hp}</span>
+                                                <span className="text-emerald-400 font-black text-[10px]">{interpolatedStats.hp}</span>
                                             </div>
-                                            <div className="flex flex-col items-center">
+                                            <div className="flex justify-between items-center px-1">
                                                 <span className="text-[8px] text-slate-500 font-bold">ATK</span>
-                                                <span className="text-rose-400 font-black text-xs">{interpolatedStats.atk}</span>
+                                                <span className="text-rose-400 font-black text-[10px]">{interpolatedStats.atk}</span>
                                             </div>
-                                            <div className="flex flex-col items-center">
+                                            <div className="flex justify-between items-center px-1">
                                                 <span className="text-[8px] text-slate-500 font-bold">DEF</span>
-                                                <span className="text-blue-400 font-black text-xs">{interpolatedStats.def}</span>
+                                                <span className="text-blue-400 font-black text-[10px]">{interpolatedStats.def}</span>
                                             </div>
-                                            <div className="flex flex-col items-center">
+                                            <div className="flex justify-between items-center px-1">
                                                 <span className="text-[8px] text-slate-500 font-bold">SPD</span>
-                                                <span className="text-amber-400 font-black text-xs">{interpolatedStats.spd}</span>
+                                                <span className="text-amber-400 font-black text-[10px]">{interpolatedStats.spd}</span>
                                             </div>
                                         </div>
                                     )}
 
                                     {/* セット済みスキル表示 */}
                                     {equippedSkillDefs.length > 0 && (
-                                        <div className="mt-3 flex items-center justify-center gap-2">
-                                            <span className="text-[9px] text-slate-500 font-bold">SKILLS:</span>
+                                        <div className="mt-2 flex flex-wrap items-center justify-center gap-1">
                                             {equippedSkillDefs.map(skill => skill && (
-                                                <div key={skill.id} className={`bg-gradient-to-r ${skill.color} px-2 py-0.5 rounded-full text-[9px] font-bold text-white`}>
+                                                <div key={skill.id} className={`bg-gradient-to-r ${skill.color} px-1.5 py-0.5 rounded-full text-[8px] font-bold text-white`}>
                                                     {skill.name}
                                                 </div>
                                             ))}
@@ -432,76 +430,76 @@ export default function SeekerDashboard() {
                                 </div>
                             </div>
 
-                            {/* 装備スロット */}
-                            <div className="flex-1 w-full space-y-3">
-                                <h3 className="text-xs font-black text-slate-400 uppercase tracking-widest border-b border-slate-700 pb-2 mb-3">Current Equipment</h3>
+                            {/* 右: 装備スロット + パートナー */}
+                            <div className="flex-1 w-full space-y-1.5 md:space-y-3">
+                                <h3 className="text-[9px] md:text-xs font-black text-slate-400 uppercase tracking-widest border-b border-slate-700 pb-1.5 md:pb-2 mb-1.5 md:mb-3">Equipment</h3>
 
                                 <EquipmentSlot label="Weapon" item={weaponDetails} />
                                 <EquipmentSlot label="Armor" item={armorDetails} />
                                 <EquipmentSlot label="Accessory" item={accessoryDetails} />
 
-                                <Link href="/mypage/equipment" className="mt-3 block text-center text-xs font-bold text-indigo-400 hover:text-indigo-300 py-2 bg-indigo-500/10 rounded-xl transition-colors">
+                                <Link href="/game/partner-room" className="flex items-center gap-2 bg-indigo-500/10 border border-indigo-500/20 rounded-xl px-2 py-1.5 md:py-2 group hover:border-indigo-500/50 transition-colors">
+                                    <div className="w-7 h-7 md:w-8 md:h-8 rounded-lg bg-indigo-500/20 flex items-center justify-center flex-shrink-0">
+                                        <Sparkles size={14} className="text-indigo-400" />
+                                    </div>
+                                    <div>
+                                        <p className="text-[9px] font-black text-slate-500 uppercase">Partner</p>
+                                        <p className="text-[10px] md:text-xs font-black text-indigo-300">パートナー</p>
+                                    </div>
+                                </Link>
+
+                                <Link href="/mypage/equipment" className="block text-center text-[10px] font-bold text-indigo-400 hover:text-indigo-300 py-1.5 bg-indigo-500/10 rounded-xl transition-colors">
                                     装備を変更する
                                 </Link>
                             </div>
                         </div>
                     </div>
 
-                    {/* メインアクション 5ボタン横並び */}
-                    <div className="grid grid-cols-3 sm:grid-cols-3 lg:grid-cols-5 gap-2 sm:gap-3">
-                        <Link href="/elearning" className="bg-gradient-to-br from-indigo-600 to-blue-700 p-4 rounded-2xl shadow-lg group hover:scale-[1.02] transition-transform relative overflow-hidden flex flex-col justify-between min-h-[120px]">
-                            <div className="absolute right-[-15%] bottom-[-25%] opacity-15">
+                    {/* メインアクション 5ボタン — 常に5列横並び */}
+                    <div className="grid grid-cols-5 gap-1.5 md:gap-3">
+                        <Link href="/elearning" className="bg-gradient-to-br from-indigo-600 to-blue-700 p-2 md:p-4 rounded-xl md:rounded-2xl shadow-lg active:scale-95 md:hover:scale-[1.02] transition-transform relative overflow-hidden flex flex-col items-center justify-center gap-1 md:gap-0 md:justify-between min-h-[70px] md:min-h-[120px]">
+                            <div className="hidden md:block absolute right-[-15%] bottom-[-25%] opacity-15">
                                 <BookOpen size={80} />
                             </div>
-                            <div className="relative z-10">
-                                <PlayCircle size={20} className="text-white/80 mb-2" />
-                                <h3 className="text-sm font-black text-white leading-tight">学習</h3>
-                                <p className="text-[9px] font-bold text-indigo-200/70 mt-1">動画でEXP獲得</p>
-                            </div>
+                            <PlayCircle size={18} className="text-white/90 md:mb-2 relative z-10" />
+                            <h3 className="text-[10px] md:text-sm font-black text-white leading-tight text-center relative z-10">学習</h3>
+                            <p className="hidden md:block text-[9px] font-bold text-indigo-200/70 mt-1 relative z-10">動画でEXP獲得</p>
                         </Link>
 
-                        <Link href="/game/tower-defense" className="bg-gradient-to-br from-rose-600 to-orange-600 p-4 rounded-2xl shadow-lg group hover:scale-[1.02] transition-transform relative overflow-hidden flex flex-col justify-between min-h-[120px]">
-                            <div className="absolute right-[-15%] bottom-[-25%] opacity-15">
+                        <Link href="/game/tower-defense" className="bg-gradient-to-br from-rose-600 to-orange-600 p-2 md:p-4 rounded-xl md:rounded-2xl shadow-lg active:scale-95 md:hover:scale-[1.02] transition-transform relative overflow-hidden flex flex-col items-center justify-center gap-1 md:gap-0 md:justify-between min-h-[70px] md:min-h-[120px]">
+                            <div className="hidden md:block absolute right-[-15%] bottom-[-25%] opacity-15">
                                 <Swords size={80} />
                             </div>
-                            <div className="relative z-10">
-                                <Swords size={20} className="text-white/80 mb-2" />
-                                <h3 className="text-sm font-black text-white leading-tight">TD</h3>
-                                <p className="text-[9px] font-bold text-rose-200/70 mt-1">バトルで報酬</p>
-                            </div>
+                            <Swords size={18} className="text-white/90 md:mb-2 relative z-10" />
+                            <h3 className="text-[10px] md:text-sm font-black text-white leading-tight text-center relative z-10">TD</h3>
+                            <p className="hidden md:block text-[9px] font-bold text-rose-200/70 mt-1 relative z-10">バトルで報酬</p>
                         </Link>
 
-                        <Link href="/game/gacha" className="bg-gradient-to-br from-amber-500 to-yellow-600 p-4 rounded-2xl shadow-lg group hover:scale-[1.02] transition-transform relative overflow-hidden flex flex-col justify-between min-h-[120px]">
-                            <div className="absolute right-[-15%] bottom-[-25%] opacity-15">
+                        <Link href="/game/gacha" className="bg-gradient-to-br from-amber-500 to-yellow-600 p-2 md:p-4 rounded-xl md:rounded-2xl shadow-lg active:scale-95 md:hover:scale-[1.02] transition-transform relative overflow-hidden flex flex-col items-center justify-center gap-1 md:gap-0 md:justify-between min-h-[70px] md:min-h-[120px]">
+                            <div className="hidden md:block absolute right-[-15%] bottom-[-25%] opacity-15">
                                 <Sparkles size={80} />
                             </div>
-                            <div className="relative z-10">
-                                <Ticket size={20} className="text-white/80 mb-2" />
-                                <h3 className="text-sm font-black text-white leading-tight">ガチャ</h3>
-                                <p className="text-[9px] font-bold text-amber-200/70 mt-1">装備入手</p>
-                            </div>
+                            <Ticket size={18} className="text-white/90 md:mb-2 relative z-10" />
+                            <h3 className="text-[10px] md:text-sm font-black text-white leading-tight text-center relative z-10">ガチャ</h3>
+                            <p className="hidden md:block text-[9px] font-bold text-amber-200/70 mt-1 relative z-10">装備入手</p>
                         </Link>
 
-                        <Link href="/game/skill-tree" className="bg-gradient-to-br from-emerald-600 to-teal-700 p-4 rounded-2xl shadow-lg group hover:scale-[1.02] transition-transform relative overflow-hidden flex flex-col justify-between min-h-[120px]">
-                            <div className="absolute right-[-15%] bottom-[-25%] opacity-15">
+                        <Link href="/game/skill-tree" className="bg-gradient-to-br from-emerald-600 to-teal-700 p-2 md:p-4 rounded-xl md:rounded-2xl shadow-lg active:scale-95 md:hover:scale-[1.02] transition-transform relative overflow-hidden flex flex-col items-center justify-center gap-1 md:gap-0 md:justify-between min-h-[70px] md:min-h-[120px]">
+                            <div className="hidden md:block absolute right-[-15%] bottom-[-25%] opacity-15">
                                 <Zap size={80} />
                             </div>
-                            <div className="relative z-10">
-                                <Zap size={20} className="text-white/80 mb-2" />
-                                <h3 className="text-sm font-black text-white leading-tight">スキル</h3>
-                                <p className="text-[9px] font-bold text-emerald-200/70 mt-1">SP消費で強化</p>
-                            </div>
+                            <Zap size={18} className="text-white/90 md:mb-2 relative z-10" />
+                            <h3 className="text-[10px] md:text-sm font-black text-white leading-tight text-center relative z-10">スキル</h3>
+                            <p className="hidden md:block text-[9px] font-bold text-emerald-200/70 mt-1 relative z-10">SP消費で強化</p>
                         </Link>
 
-                        <Link href="/game/partner-room" className="bg-gradient-to-br from-indigo-500 to-purple-600 p-4 rounded-2xl shadow-lg group hover:scale-[1.02] transition-transform relative overflow-hidden flex flex-col justify-between min-h-[120px]">
-                            <div className="absolute right-[-15%] bottom-[-25%] opacity-15">
-                                <Bug size={80} />
+                        <Link href="/game/mock-exam" className="bg-gradient-to-br from-violet-600 to-purple-700 p-2 md:p-4 rounded-xl md:rounded-2xl shadow-lg active:scale-95 md:hover:scale-[1.02] transition-transform relative overflow-hidden flex flex-col items-center justify-center gap-1 md:gap-0 md:justify-between min-h-[70px] md:min-h-[120px]">
+                            <div className="hidden md:block absolute right-[-15%] bottom-[-25%] opacity-15">
+                                <Target size={80} />
                             </div>
-                            <div className="relative z-10">
-                                <Sparkles size={20} className="text-white/80 mb-2" />
-                                <h3 className="text-sm font-black text-white leading-tight">パートナー</h3>
-                                <p className="text-[9px] font-bold text-indigo-200/70 mt-1">卵ガチャ・編成</p>
-                            </div>
+                            <Target size={18} className="text-white/90 md:mb-2 relative z-10" />
+                            <h3 className="text-[10px] md:text-sm font-black text-white leading-tight text-center relative z-10">模試</h3>
+                            <p className="hidden md:block text-[9px] font-bold text-violet-200/70 mt-1 relative z-10">本番対策</p>
                         </Link>
                     </div>
 
