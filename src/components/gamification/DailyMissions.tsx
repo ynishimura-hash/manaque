@@ -189,7 +189,7 @@ export function DailyMissions() {
                     {missions.map((mission) => (
                         <div
                             key={mission.id}
-                            className={`relative flex items-center gap-4 p-4 rounded-2xl border-2 transition-all duration-500 ${
+                            className={`relative p-4 rounded-2xl border-2 transition-all duration-500 ${
                                 mission.isDone
                                     ? 'bg-slate-50 border-slate-100'
                                     : mission.canClaim
@@ -202,69 +202,73 @@ export function DailyMissions() {
                                 <div className="absolute inset-0 rounded-2xl bg-green-200 opacity-50 animate-ping" style={{ animationDuration: '0.5s', animationIterationCount: 2 }} />
                             )}
 
-                            {/* アイコン */}
-                            <div className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 ${
-                                mission.isDone ? 'bg-green-100' : mission.canClaim ? 'bg-blue-100' : 'bg-slate-50'
-                            }`}>
-                                {mission.isDone
-                                    ? <CheckCircle size={20} className="text-green-500" />
-                                    : mission.icon
-                                }
-                            </div>
+                            <div className="flex items-start gap-3">
+                                {/* アイコン */}
+                                <div className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 ${
+                                    mission.isDone ? 'bg-green-100' : mission.canClaim ? 'bg-blue-100' : 'bg-slate-50'
+                                }`}>
+                                    {mission.isDone
+                                        ? <CheckCircle size={20} className="text-green-500" />
+                                        : mission.icon
+                                    }
+                                </div>
 
-                            {/* テキスト */}
-                            <div className="flex-grow min-w-0">
-                                <p className={`font-black text-sm ${mission.isDone ? 'text-slate-400 line-through' : 'text-slate-700'}`}>
-                                    {mission.label}
-                                </p>
-                                <p className="text-xs font-bold text-slate-400 mt-0.5">{mission.description}</p>
-
-                                {/* プログレスバー（EXP目標） */}
-                                {mission.progress && (
-                                    <div className="mt-2">
-                                        <div className="w-full bg-slate-100 rounded-full h-1.5 overflow-hidden">
-                                            <div
-                                                className={`h-full rounded-full transition-all duration-700 ${mission.isDone ? 'bg-green-400' : 'bg-blue-400'}`}
-                                                style={{ width: `${(mission.progress.current / mission.progress.total) * 100}%` }}
-                                            />
-                                        </div>
-                                        <p className="text-[10px] font-bold text-slate-400 mt-1 text-right">
-                                            {mission.progress.current} / {mission.progress.total} EXP
+                                {/* テキスト + 報酬 + アクション */}
+                                <div className="flex-grow min-w-0">
+                                    <div className="flex items-start justify-between gap-2">
+                                        <p className={`font-black text-sm ${mission.isDone ? 'text-slate-400 line-through' : 'text-slate-700'}`}>
+                                            {mission.label}
                                         </p>
+                                        {mission.isDone && (
+                                            <div className="flex items-center gap-1 text-xs font-bold text-green-600 shrink-0">
+                                                <CheckCircle size={16} className="text-green-400" />
+                                                達成済み
+                                            </div>
+                                        )}
                                     </div>
-                                )}
-                            </div>
+                                    <p className="text-xs font-bold text-slate-400 mt-0.5">{mission.description}</p>
 
-                            {/* 右側: 報酬 / 受け取るボタン / 完了マーク */}
-                            <div className="shrink-0 flex flex-col items-end gap-1.5">
-                                {/* 報酬ラベル（未完了時） */}
-                                {!mission.isDone && (
-                                    <span className="text-[10px] font-black text-orange-500 bg-orange-50 border border-orange-100 px-2 py-0.5 rounded-full whitespace-nowrap">
-                                        {mission.rewardLabel}
-                                    </span>
-                                )}
+                                    {/* プログレスバー（EXP目標） */}
+                                    {mission.progress && (
+                                        <div className="mt-2">
+                                            <div className="w-full bg-slate-100 rounded-full h-1.5 overflow-hidden">
+                                                <div
+                                                    className={`h-full rounded-full transition-all duration-700 ${mission.isDone ? 'bg-green-400' : 'bg-blue-400'}`}
+                                                    style={{ width: `${(mission.progress.current / mission.progress.total) * 100}%` }}
+                                                />
+                                            </div>
+                                            <p className="text-[10px] font-bold text-slate-400 mt-1 text-right">
+                                                {mission.progress.current} / {mission.progress.total} EXP
+                                            </p>
+                                        </div>
+                                    )}
 
-                                {mission.isDone ? (
-                                    <div className="flex items-center gap-1 text-xs font-bold text-green-600">
-                                        <CheckCircle size={18} className="text-green-400" />
-                                        <span>達成済み</span>
-                                    </div>
-                                ) : mission.canClaim && mission.onClaim ? (
-                                    <button
-                                        onClick={mission.onClaim}
-                                        className="flex items-center gap-1.5 text-xs font-black text-white bg-gradient-to-r from-blue-500 to-indigo-500 hover:from-blue-600 hover:to-indigo-600 px-4 py-1.5 rounded-xl transition-all shadow-sm shadow-blue-200 hover:shadow-blue-300 hover:scale-105 active:scale-95"
-                                    >
-                                        <Gift size={14} />
-                                        受け取る
-                                    </button>
-                                ) : mission.actionLabel && mission.onAction ? (
-                                    <button
-                                        onClick={mission.onAction}
-                                        className="flex items-center gap-1 text-xs font-black text-blue-600 bg-blue-50 hover:bg-blue-100 px-3 py-1.5 rounded-lg transition-colors"
-                                    >
-                                        {mission.actionLabel} <ChevronRight size={14} />
-                                    </button>
-                                ) : null}
+                                    {/* 報酬ラベル + アクションボタン（テキスト下に配置） */}
+                                    {!mission.isDone && (
+                                        <div className="flex flex-wrap items-center gap-2 mt-2">
+                                            <span className="text-[10px] font-black text-orange-500 bg-orange-50 border border-orange-100 px-2 py-0.5 rounded-full">
+                                                {mission.rewardLabel}
+                                            </span>
+
+                                            {mission.canClaim && mission.onClaim ? (
+                                                <button
+                                                    onClick={mission.onClaim}
+                                                    className="flex items-center gap-1.5 text-xs font-black text-white bg-gradient-to-r from-blue-500 to-indigo-500 hover:from-blue-600 hover:to-indigo-600 px-4 py-1.5 rounded-xl transition-all shadow-sm shadow-blue-200 hover:shadow-blue-300 hover:scale-105 active:scale-95"
+                                                >
+                                                    <Gift size={14} />
+                                                    受け取る
+                                                </button>
+                                            ) : mission.actionLabel && mission.onAction ? (
+                                                <button
+                                                    onClick={mission.onAction}
+                                                    className="flex items-center gap-1 text-xs font-black text-blue-600 bg-blue-50 hover:bg-blue-100 px-3 py-1.5 rounded-lg transition-colors"
+                                                >
+                                                    {mission.actionLabel} <ChevronRight size={14} />
+                                                </button>
+                                            ) : null}
+                                        </div>
+                                    )}
+                                </div>
                             </div>
                         </div>
                     ))}

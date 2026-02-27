@@ -4,6 +4,7 @@ import { Toaster } from "sonner";
 import "./globals.css";
 import LayoutWrapper from "@/components/LayoutWrapper";
 import { EvolutionAlertModal } from "@/components/gamification/EvolutionAlertModal";
+import { PwaInstallPrompt } from "@/components/PwaInstallPrompt";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -48,6 +49,7 @@ export default function RootLayout({
           <LayoutWrapper>{children}</LayoutWrapper>
           <Toaster position="top-center" richColors />
           <EvolutionAlertModal />
+          <PwaInstallPrompt />
       </body>
     </html>
   );
