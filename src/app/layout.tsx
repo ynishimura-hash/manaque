@@ -3,7 +3,6 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { Toaster } from "sonner";
 import "./globals.css";
 import LayoutWrapper from "@/components/LayoutWrapper";
-import { AuthProvider } from "@/context/AuthContext";
 import { EvolutionAlertModal } from "@/components/gamification/EvolutionAlertModal";
 
 const geistSans = Geist({
@@ -46,11 +45,9 @@ export default function RootLayout({
   return (
     <html lang="ja">
       <body className="antialiased font-sans" suppressHydrationWarning={true}>
-        <AuthProvider>
           <LayoutWrapper>{children}</LayoutWrapper>
           <Toaster position="top-center" richColors />
           <EvolutionAlertModal />
-        </AuthProvider>
       </body>
     </html>
   );

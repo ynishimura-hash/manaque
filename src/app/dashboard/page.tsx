@@ -81,8 +81,20 @@ export default function SeekerDashboard() {
     const [showEvolutionModal, setShowEvolutionModal] = useState(false);
     const supabase = createClient();
 
+    const fallbackUser = {
+        id: 'manaque-guest',
+        name: '冒険者',
+        image: 'https://api.dicebear.com/7.x/avataaars/svg?seed=manaque',
+        isOnline: true,
+        age: 20,
+        university: '',
+        faculty: '',
+        bio: '',
+        tags: [],
+    };
     const currentUser = users.find(u => u.id === currentUserId) ||
-        (activeRole === 'admin' ? users.find(u => u.id === '061fbf87-f36e-4612-80b4-dedc77b55d5e') : undefined);
+        (activeRole === 'admin' ? users.find(u => u.id === '061fbf87-f36e-4612-80b4-dedc77b55d5e') : undefined) ||
+        fallbackUser;
 
     useEffect(() => {
         let isMounted = true;
@@ -170,23 +182,6 @@ export default function SeekerDashboard() {
         );
     }
 
-    if (!currentUser) {
-        return (
-            <div className="min-h-screen bg-slate-900 flex items-center justify-center p-6">
-                <div className="bg-slate-800 p-8 rounded-3xl shadow-2xl max-w-sm w-full text-center space-y-6 border border-slate-700">
-                    <div className="w-20 h-20 bg-indigo-500/20 text-indigo-400 rounded-full flex items-center justify-center mx-auto">
-                        <Lock size={40} />
-                    </div>
-                    <div className="space-y-2">
-                        <h2 className="text-xl font-black text-white">ログインが必要です</h2>
-                    </div>
-                    <Link href="/login/seeker" className="block bg-indigo-600 text-white font-black py-4 rounded-2xl hover:bg-indigo-500 transition-all">
-                        ログイン画面へ
-                    </Link>
-                </div>
-            </div>
-        );
-    }
 
     const renderEvolutionModal = () => {
         if (!selectedCharacterId || !characterInfo) return null;
@@ -310,7 +305,7 @@ export default function SeekerDashboard() {
                     <div className="flex items-center gap-3">
                         <div className="relative">
                             <img
-                                src={currentUser.image || getFallbackAvatarUrl(currentUser.id, currentUser.gender)}
+                                src={currentUser.image || getFallbackAvatarUrl(currentUser.id, (currentUser as any).gender)}
                                 className="w-12 h-12 rounded-full object-cover ring-2 ring-indigo-500"
                                 alt=""
                             />
