@@ -444,15 +444,20 @@ export default function SeekerDashboard() {
                                     )}
 
                                     {/* アクティブパートナー */}
-                                    {activePartnerData && (
-                                        <Link href="/game/partner-room" className="mt-2 flex items-center gap-1.5 bg-slate-800/80 border border-slate-700/50 rounded-xl px-2 py-1 hover:border-indigo-500/50 transition-colors">
-                                            <img src={activePartnerData.imageUrl} alt={activePartnerInstance?.customName || activePartnerData.name} className="w-7 h-7 object-contain" />
-                                            <div className="min-w-0">
-                                                <p className="text-[8px] font-black text-indigo-400 truncate">{activePartnerInstance?.customName || activePartnerData.name}</p>
-                                                <p className="text-[7px] font-bold text-slate-500">Lv.{activePartnerInstance?.level || 1}</p>
-                                            </div>
-                                        </Link>
-                                    )}
+                                    {activePartnerData && (() => {
+                                        const pLevel = activePartnerInstance?.level || 1;
+                                        const pStage = activePartnerData.stages?.slice().reverse().find((s: any) => pLevel >= s.level) || activePartnerData.stages?.[0];
+                                        const pImage = pStage?.imageUrl;
+                                        return (
+                                            <Link href="/game/partner-room" className="mt-2 flex items-center gap-1.5 bg-slate-800/80 border border-slate-700/50 rounded-xl px-2 py-1 hover:border-indigo-500/50 transition-colors">
+                                                {pImage && <img src={pImage} alt={activePartnerInstance?.customName || activePartnerData.name} className="w-7 h-7 object-contain" />}
+                                                <div className="min-w-0">
+                                                    <p className="text-[8px] font-black text-indigo-400 truncate">{activePartnerInstance?.customName || activePartnerData.name}</p>
+                                                    <p className="text-[7px] font-bold text-slate-500">Lv.{pLevel}</p>
+                                                </div>
+                                            </Link>
+                                        );
+                                    })()}
                                 </div>
                             </div>
 
