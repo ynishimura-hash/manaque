@@ -143,12 +143,12 @@ export function LessonMap({ onLessonSelect }: LessonMapProps) {
 
                                 {/* Character standing exactly on the Node */}
                                 {isCurrent && currentStage && (
-                                    <div className="absolute bottom-[90%] left-1/2 -translate-x-1/2 w-28 h-28 md:w-32 md:h-32 animate-bounce-custom pointer-events-none z-50">
+                                    <div className="absolute bottom-[85%] left-1/2 -translate-x-1/2 w-16 h-16 md:w-32 md:h-32 animate-bounce-custom pointer-events-none z-50">
                                         <div className="relative w-full h-full">
-                                            <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-12 h-3 bg-black/20 rounded-[100%] blur-sm animate-shadow-pulse" />
+                                            <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-8 md:w-12 h-2 md:h-3 bg-black/20 rounded-[100%] blur-sm animate-shadow-pulse" />
                                             <img src={currentStage.imageUrl} alt="Character" className="w-full h-full object-contain drop-shadow-[0_4px_8px_rgba(0,0,0,0.5)]" />
                                         </div>
-                                        <div className="absolute -top-4 -right-8 bg-amber-400 text-white text-[10px] md:text-xs font-black px-3 py-1 rounded-full shadow-lg transform rotate-6 whitespace-nowrap">
+                                        <div className="absolute -top-3 -right-4 md:-top-4 md:-right-8 bg-amber-400 text-white text-[8px] md:text-xs font-black px-2 md:px-3 py-0.5 md:py-1 rounded-full shadow-lg transform rotate-6 whitespace-nowrap">
                                             You are here!
                                         </div>
                                     </div>

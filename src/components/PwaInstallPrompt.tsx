@@ -31,7 +31,8 @@ export function PwaInstallPrompt() {
         const isIosDevice = /iPhone|iPad|iPod/.test(ua);
         setIsIos(isIosDevice);
 
-        // 一度閉じた場合は1日間非表示
+        // 永久非表示または一時非表示チェック
+        if (localStorage.getItem('pwa_install_never') === 'true') return;
         const dismissed = localStorage.getItem('pwa_install_dismissed');
         if (dismissed) {
             const dismissedAt = parseInt(dismissed, 10);
@@ -74,6 +75,11 @@ export function PwaInstallPrompt() {
         localStorage.setItem('pwa_install_dismissed', String(Date.now()));
     };
 
+    const handleNeverShow = () => {
+        setShowBanner(false);
+        localStorage.setItem('pwa_install_never', 'true');
+    };
+
     if (isStandalone || !showBanner) return null;
 
     return (
@@ -112,6 +118,12 @@ export function PwaInstallPrompt() {
                     <X size={16} />
                 </button>
             </div>
+            <button
+                onClick={handleNeverShow}
+                className="mt-1.5 w-full text-center text-[10px] font-bold text-slate-500 hover:text-slate-300 py-1 transition-colors"
+            >
+                今後表示しない
+            </button>
         </div>
     );
 }

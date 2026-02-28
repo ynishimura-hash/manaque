@@ -75,11 +75,26 @@ export default function SeekerDashboard() {
         checkAndAddLoginBonus,
         lastDailyQuizDate,
         equippedSkills,
+        selectedPartnerId,
+        partnerInventory,
     } = useGamificationStore();
 
     const [isCheckingAuth, setIsCheckingAuth] = useState(true);
     const [showEvolutionModal, setShowEvolutionModal] = useState(false);
+    const [partnerConfig, setPartnerConfig] = useState<any[]>([]);
     const supabase = createClient();
+
+    // パートナー表示用のconfig読み込み
+    useEffect(() => {
+        fetch('/data/td-config.json')
+            .then(res => res.json())
+            .then(data => setPartnerConfig(data?.partners?.list || []))
+            .catch(() => {});
+    }, []);
+
+    // アクティブパートナー情報
+    const activePartnerInstance = partnerInventory.find(i => i.instanceId === selectedPartnerId);
+    const activePartnerData = activePartnerInstance ? partnerConfig.find((p: any) => p.id === activePartnerInstance.partnerId) : null;
 
     const fallbackUser = {
         id: 'manaque-guest',
@@ -426,6 +441,17 @@ export default function SeekerDashboard() {
                                                 </div>
                                             ))}
                                         </div>
+                                    )}
+
+                                    {/* アクティブパートナー */}
+                                    {activePartnerData && (
+                                        <Link href="/game/partner-room" className="mt-2 flex items-center gap-1.5 bg-slate-800/80 border border-slate-700/50 rounded-xl px-2 py-1 hover:border-indigo-500/50 transition-colors">
+                                            <img src={activePartnerData.imageUrl} alt={activePartnerInstance?.customName || activePartnerData.name} className="w-7 h-7 object-contain" />
+                                            <div className="min-w-0">
+                                                <p className="text-[8px] font-black text-indigo-400 truncate">{activePartnerInstance?.customName || activePartnerData.name}</p>
+                                                <p className="text-[7px] font-bold text-slate-500">Lv.{activePartnerInstance?.level || 1}</p>
+                                            </div>
+                                        </Link>
                                     )}
                                 </div>
                             </div>

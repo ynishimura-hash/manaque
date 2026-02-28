@@ -142,6 +142,10 @@ export interface GamificationState {
     // バッジ判定（新規獲得IDを返す）
     checkAndAwardBadges: () => string[];
 
+    // ウェルカムギフト
+    hasReceivedWelcomeGift: boolean;
+    claimWelcomeGift: () => boolean;
+
     // 進化演出フラグ
     isEvolutionReady: boolean;
     clearEvolutionReady: () => void;
@@ -183,6 +187,17 @@ export const useGamificationStore = create<GamificationState>()(
             savedProgress: {},
             unlockedClasses: [],
             selectedPartnerId: null,
+            hasReceivedWelcomeGift: false,
+
+            claimWelcomeGift: () => {
+                if (get().hasReceivedWelcomeGift) return false;
+                set((state) => ({
+                    hasReceivedWelcomeGift: true,
+                    gachaTickets: state.gachaTickets + 20,
+                    eggTickets: state.eggTickets + 20,
+                }));
+                return true;
+            },
 
             syncToCloud: async () => {
                 try {
@@ -242,6 +257,8 @@ export const useGamificationStore = create<GamificationState>()(
                 const newUnlockedClasses = state.unlockedClasses.includes(id)
                     ? state.unlockedClasses
                     : [...state.unlockedClasses, id];
+                // ウェルカムギフト：初回キャラ選択時にチケット20枚ずつプレゼント
+                const welcomeBonus = !state.hasReceivedWelcomeGift;
                 set({
                     selectedCharacterId: id,
                     exp: loadedProgress.exp,
@@ -251,6 +268,11 @@ export const useGamificationStore = create<GamificationState>()(
                     equippedSkills: loadedProgress.equippedSkills || [],
                     savedProgress: newSavedProgress,
                     unlockedClasses: newUnlockedClasses,
+                    ...(welcomeBonus ? {
+                        hasReceivedWelcomeGift: true,
+                        gachaTickets: state.gachaTickets + 20,
+                        eggTickets: state.eggTickets + 20,
+                    } : {}),
                 });
             },
 
@@ -548,6 +570,7 @@ export const useGamificationStore = create<GamificationState>()(
                 savedProgress:          persistedState?.savedProgress          || {},
                 unlockedClasses:        persistedState?.unlockedClasses        || [],
                 selectedPartnerId:      persistedState?.selectedPartnerId      || null,
+                hasReceivedWelcomeGift: persistedState?.hasReceivedWelcomeGift || false,
             }),
         }
     )

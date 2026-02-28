@@ -10,7 +10,7 @@ export interface LessonData {
 }
 
 export const CERTIFICATION_LESSONS: LessonData[] = [
-    { id: 'lesson1', title: '販売士の役割と心構え', type: 'video', exp: 50, duration: '2:30', thumbnail: '/images/lessons/lesson1-1.png' },
+    { id: 'lesson1', title: '販売士の役割と心構え', type: 'video', exp: 100, duration: '2:30', thumbnail: '/images/lessons/lesson1-1.png' },
     { id: 'lesson2', title: 'マーケティングの基礎', type: 'video', exp: 50, duration: '3:15', thumbnail: '/images/lessons/lesson2-1.png' },
     { id: 'lesson3', title: 'ストアオペレーション', type: 'video', exp: 50, duration: '2:45', thumbnail: '/images/lessons/lesson3-1.png' },
     { id: 'lesson4', title: '商品知識', type: 'video', exp: 50, duration: '3:00', thumbnail: '/images/lessons/lesson4-1.png' },
