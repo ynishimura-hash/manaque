@@ -3,12 +3,10 @@
 import React from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Layout as DashboardIcon, GraduationCap, TrendingUp, Settings, LogOut, LogIn, Menu } from 'lucide-react';
+import { Layout as DashboardIcon, GraduationCap, TrendingUp, Settings, LogIn, Menu } from 'lucide-react';
 import MobileBottomNav from './MobileBottomNav';
 import ScrollToTop from './ScrollToTop';
 
-const MANAQUE_UNLOCK_KEY = 'manaque_unlocked';
-const PROTECTED_ROUTES = ['/game', '/mypage', '/dashboard', '/elearning'];
 
 interface NavItem {
     name: string;
@@ -27,31 +25,12 @@ export default function LayoutWrapper({ children }: { children: React.ReactNode 
     const pathname = usePathname();
     const [isMenuOpen, setIsMenuOpen] = React.useState(false);
     const [mounted, setMounted] = React.useState(false);
-    const [isUnlocked, setIsUnlocked] = React.useState(false);
 
     React.useEffect(() => {
         setMounted(true);
-        setIsUnlocked(localStorage.getItem(MANAQUE_UNLOCK_KEY) === 'true');
     }, []);
 
-    // パスコード未解錠時は保護ルートから /welcome にリダイレクト
-    React.useEffect(() => {
-        if (!mounted) return;
-        const unlocked = localStorage.getItem(MANAQUE_UNLOCK_KEY) === 'true';
-        if (!unlocked) {
-            const isProtected = PROTECTED_ROUTES.some(r => window.location.pathname.startsWith(r));
-            if (isProtected) {
-                window.location.href = '/welcome';
-            }
-        }
-    }, [pathname, mounted]);
-
-    const handleLogout = () => {
-        localStorage.removeItem(MANAQUE_UNLOCK_KEY);
-        window.location.href = '/welcome';
-    };
-
-    const isPublicPage = pathname === '/welcome' || pathname?.startsWith('/login');
+    const isPublicPage = pathname?.startsWith('/login');
     const isAdminDashboard = pathname?.startsWith('/admin');
     const isCompanyDashboard = pathname?.startsWith('/dashboard/company');
     const isBabyBase = pathname?.startsWith('/babybase');
@@ -94,25 +73,13 @@ export default function LayoutWrapper({ children }: { children: React.ReactNode 
                 {renderNavItems()}
 
                 <div className="px-4 pb-6">
-                    {!mounted ? (
-                        <div className="w-full h-[46px] rounded-xl bg-slate-100 animate-pulse" />
-                    ) : isUnlocked ? (
-                        <button
-                            onClick={handleLogout}
-                            className="w-full flex items-center gap-3 px-4 py-3 text-sm font-bold text-white bg-slate-800 rounded-xl hover:bg-slate-700 transition-colors shadow-sm cursor-pointer"
-                        >
-                            <LogOut size={20} />
-                            ログアウト
-                        </button>
-                    ) : (
-                        <Link
-                            href="/welcome"
-                            className="w-full flex items-center gap-3 px-4 py-3 text-sm font-bold text-white bg-blue-600 rounded-xl hover:bg-blue-700 transition-colors shadow-sm"
-                        >
-                            <LogIn size={20} />
-                            ログイン
-                        </Link>
-                    )}
+                    <Link
+                        href="/login"
+                        className="w-full flex items-center gap-3 px-4 py-3 text-sm font-bold text-white bg-blue-600 rounded-xl hover:bg-blue-700 transition-colors shadow-sm"
+                    >
+                        <LogIn size={20} />
+                        ログイン
+                    </Link>
                 </div>
             </aside>
 
@@ -147,26 +114,14 @@ export default function LayoutWrapper({ children }: { children: React.ReactNode 
                     {renderNavItems(() => setIsMenuOpen(false))}
 
                     <div className="px-4 pb-6">
-                        {!mounted ? (
-                            <div className="w-full h-[46px] rounded-xl bg-slate-100 animate-pulse" />
-                        ) : isUnlocked ? (
-                            <button
-                                onClick={() => { setIsMenuOpen(false); handleLogout(); }}
-                                className="w-full flex items-center gap-3 px-4 py-3 text-sm font-bold text-white bg-slate-800 rounded-xl cursor-pointer"
-                            >
-                                <LogOut size={20} />
-                                ログアウト
-                            </button>
-                        ) : (
-                            <Link
-                                href="/welcome"
-                                onClick={() => setIsMenuOpen(false)}
-                                className="w-full flex items-center gap-3 px-4 py-3 text-sm font-bold text-white bg-blue-600 rounded-xl"
-                            >
-                                <LogIn size={20} />
-                                ログイン
-                            </Link>
-                        )}
+                        <Link
+                            href="/login"
+                            onClick={() => setIsMenuOpen(false)}
+                            className="w-full flex items-center gap-3 px-4 py-3 text-sm font-bold text-white bg-blue-600 rounded-xl"
+                        >
+                            <LogIn size={20} />
+                            ログイン
+                        </Link>
                     </div>
                 </div>
             </div>

@@ -60,7 +60,7 @@ function JoinContent() {
                         ログインして参加
                     </button>
                     <button
-                        onClick={() => router.push(`/welcome?redirect=/organizations/join?token=${token}`)}
+                        onClick={() => router.push(`/register/seeker?redirect=/organizations/join?token=${token}`)}
                         className="w-full bg-slate-100 text-slate-600 py-3 rounded-xl font-bold hover:bg-slate-200 transition-colors"
                     >
                         新規登録
