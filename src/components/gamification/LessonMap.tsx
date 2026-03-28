@@ -1,17 +1,40 @@
 "use client";
 
 import React, { useEffect, useState } from 'react';
-import { CERTIFICATION_LESSONS } from '@/lib/certificationLessons';
 import { useGamificationStore } from '@/store/useGamificationStore';
 import { PlayCircle, CheckCircle, Lock, FastForward, Flag, Award } from 'lucide-react';
 import { CHARACTER_DATA } from './characterData';
 
-interface LessonMapProps {
-    onLessonSelect: (lessonId: string, isCompleted: boolean) => void;
+interface MapLesson {
+    id: string;
+    title: string;
+    type: string;
+    thumbnail_url: string | null;
+    order_index: number;
 }
 
-export function LessonMap({ onLessonSelect }: LessonMapProps) {
+interface LessonMapProps {
+    onLessonSelect: (lessonId: string, isCompleted: boolean) => void;
+    lessons?: MapLesson[];
+    completedIds?: string[];
+}
+
+export function LessonMap({ onLessonSelect, lessons: externalLessons, completedIds }: LessonMapProps) {
     const { completedLessons, selectedCharacterId, level } = useGamificationStore();
+
+    // 外部から渡されたcompletedIdsとローカルストアの両方をマージ
+    const allCompleted = [...new Set([...completedLessons, ...(completedIds ?? [])])];
+
+    // 外部レッスンデータをマップ用に変換（フォールバックは空配列）
+    const mapLessons = (externalLessons ?? []).map((l) => ({
+        id: l.id,
+        title: l.title,
+        type: l.type as 'video' | 'quiz',
+        exp: 50,
+        duration: '',
+        thumbnail: l.thumbnail_url ?? undefined,
+    }));
+
     const [isMounted, setIsMounted] = useState(false);
 
     useEffect(() => {
@@ -20,8 +43,8 @@ export function LessonMap({ onLessonSelect }: LessonMapProps) {
 
     // 現在アンロックされている最も先のレッスンインデックスを見つける
     const unlockedIndex = Math.min(
-        completedLessons.length,
-        CERTIFICATION_LESSONS.length - 1
+        allCompleted.length,
+        mapLessons.length - 1
     );
 
     // キャラクター画像の取得
@@ -29,7 +52,7 @@ export function LessonMap({ onLessonSelect }: LessonMapProps) {
     const currentStage = character ? (character.stages.slice().reverse().find(s => (level || 1) >= s.level) || character.stages[0]) : null;
 
     // パスとノードの計算
-    const numLessons = CERTIFICATION_LESSONS.length;
+    const numLessons = mapLessons.length;
     const totalNodes = numLessons + 2; // START, 5 lessons, GOAL
 
     const getPath = (leftX: number, rightX: number) => {
@@ -53,7 +76,7 @@ export function LessonMap({ onLessonSelect }: LessonMapProps) {
     const pathString = getPath(20, 80); // 共通のカーブ
 
     // 進捗の割合（青線のハイライト用）
-    const progressIndex = Math.min(completedLessons.length + 1, totalNodes - 1);
+    const progressIndex = Math.min(allCompleted.length + 1, totalNodes - 1);
     const progressPercent = isMounted ? (progressIndex / (totalNodes - 1)) * 100 : 0;
 
     return (
@@ -101,8 +124,8 @@ export function LessonMap({ onLessonSelect }: LessonMapProps) {
                 </div>
 
                 {/* Lessons */}
-                {CERTIFICATION_LESSONS.map((lesson, index) => {
-                    const isCompleted = completedLessons.includes(lesson.id);
+                {mapLessons.map((lesson, index) => {
+                    const isCompleted = allCompleted.includes(lesson.id);
                     const isUnlocked = index <= unlockedIndex;
                     const isCurrent = index === unlockedIndex;
 
@@ -209,8 +232,8 @@ export function LessonMap({ onLessonSelect }: LessonMapProps) {
                     className="absolute z-10 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center"
                     style={{ top: '100%', left: '50%' }}
                 >
-                    <div className={`w-16 h-16 md:w-20 md:h-20 border-4 rounded-full flex flex-col items-center justify-center shadow-lg transition-all duration-700 bg-white shrink-0 ${completedLessons.length === CERTIFICATION_LESSONS.length ? 'border-yellow-400 text-yellow-500 scale-110 shadow-[0_0_40px_rgba(250,204,21,0.5)] border-dashed' : 'border-slate-200 text-slate-300 border-dashed'}`}>
-                        <Award size={32} className={`md:w-10 md:h-10 ${completedLessons.length === CERTIFICATION_LESSONS.length ? 'animate-spin-slow' : ''}`} />
+                    <div className={`w-16 h-16 md:w-20 md:h-20 border-4 rounded-full flex flex-col items-center justify-center shadow-lg transition-all duration-700 bg-white shrink-0 ${allCompleted.length === mapLessons.length ? 'border-yellow-400 text-yellow-500 scale-110 shadow-[0_0_40px_rgba(250,204,21,0.5)] border-dashed' : 'border-slate-200 text-slate-300 border-dashed'}`}>
+                        <Award size={32} className={`md:w-10 md:h-10 ${allCompleted.length === mapLessons.length ? 'animate-spin-slow' : ''}`} />
                         <span className="text-[10px] md:text-xs font-black mt-1 tracking-widest">GOAL</span>
                     </div>
                 </div>

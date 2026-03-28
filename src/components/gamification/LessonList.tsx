@@ -182,7 +182,11 @@ export function LessonList() {
             </div>
 
             {viewMode === "map" ? (
-                <LessonMap onLessonSelect={handleMapSelect} />
+                <LessonMap
+                    onLessonSelect={handleMapSelect}
+                    lessons={lessons}
+                    completedIds={lessons.filter((l) => isLessonCompleted(l.id)).map((l) => l.id)}
+                />
             ) : (
                 <div className="flex flex-col gap-4">
                     {lessons.map((lesson, index) => {
