@@ -5,6 +5,7 @@ import { HelpCircle, CheckCircle, XCircle, ArrowRight, Trophy, RefreshCw } from 
 
 interface QuizProps {
     lessonId: string;
+    quizData?: QuizQuestion[];
     onClose: () => void;
     onComplete: () => void;
 }
@@ -272,8 +273,11 @@ const DEFAULT_QUIZ: QuizDef = {
     ],
 };
 
-export function QuizModal({ lessonId, onClose, onComplete }: QuizProps) {
-    const quizDef = QUIZ_DATA[lessonId] ?? DEFAULT_QUIZ;
+export function QuizModal({ lessonId, quizData, onClose, onComplete }: QuizProps) {
+    // DBから渡されたクイズデータを優先、なければハードコードデータ、最後にデフォルト
+    const quizDef: QuizDef = quizData && quizData.length > 0
+        ? { questions: quizData, passingScore: Math.ceil(quizData.length * 0.6) }
+        : QUIZ_DATA[lessonId] ?? DEFAULT_QUIZ;
     const { questions, passingScore } = quizDef;
     const totalQuestions = questions.length;
 
